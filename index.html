@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting to UPI Payment...</title>
+    <script>
+        function isMobile() {
+            return /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent);
+        }
+
+        function redirectToUPI() {
+            var upiLink = "upi://pay?pa=iambhartiya@ibl&pn=Shyam%20Gadhiya&mc=0000&mode=02&purpose=00";
+
+            if (isMobile()) {
+                // Redirect on mobile
+                window.location.href = upiLink;
+                
+                // Show fallback if redirection fails
+                setTimeout(function() {
+                    document.getElementById("fallback").style.display = "block";
+                }, 3000);
+            } else {
+                // Show message on desktop
+                document.getElementById("desktopMessage").style.display = "block";
+            }
+        }
+    </script>
+</head>
+<body onload="redirectToUPI()">
+    <h2>Redirecting to UPI Payment...</h2>
+
+    <!-- Desktop Users See This Message -->
+    <div id="desktopMessage" style="display: none; text-align: center; font-size: 18px; font-weight: bold; color: red;">
+        <p>🚨 Please click from a <strong>Mobile Phone</strong> to proceed with UPI payments. Thank You! 🙏</p>
+    </div>
+
+    <!-- UPI Link for Mobile Users -->
+    <p>If nothing happens, click the link below:</p>
+    <a id="upiLink" href="upi://pay?pa=Q86802208@ybl&pn=PhonePeMerchant&mc=5541&mode=02&purpose=00&orgid=180001&sign=MEYCIQCuZWo7yYmUHKWyGsdqFtOLsrS9/Ty4emfEK1imEwOQmgIhAO6PD8wlLg1HeI1w4I3KABt0ouO1KMoqJuCQdYTvCHlS">Click here to Pay via UPI</a>
+
+    <!-- Fallback if redirection fails -->
+    <div id="fallback" style="display: none; margin-top: 20px;">
+        <p>UPI app did not open? Please copy this link and open it manually in your UPI app.</p>
+        <input type="text" value="upi://pay?pa=Q86802208@ybl&pn=PhonePeMerchant&mc=5541&mode=02&purpose=00&orgid=180001&sign=MEYCIQCuZWo7yYmUHKWyGsdqFtOLsrS9/Ty4emfEK1imEwOQmgIhAO6PD8wlLg1HeI1w4I3KABt0ouO1KMoqJuCQdYTvCHlS" readonly onclick="this.select();">
+    </div>
+</body>
+</html>
